@@ -1,5 +1,7 @@
 require_relative '../test_helper'
 
+#TODO: rewrite tests using Minitest best practices ()
+
 describe "TMDB::Search" do
   # Create a 'test/api_key' file and paste in your API key to run the tests
   # TODO: Work in 'gem webmock' for offline testing, review: http://code.tutsplus.com/articles/writing-an-api-wrapper-in-ruby-with-tdd--net-23875

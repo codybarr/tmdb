@@ -17,3 +17,5 @@ pkg
 
 # Custom
 */api_key
+.document
+.DS_Store

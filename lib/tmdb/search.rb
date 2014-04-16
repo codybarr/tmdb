@@ -30,7 +30,7 @@ module TMDB
       # movie['title'] = "Fight Club"
     end
 
-    # TODO: tv_search(query, page), tv(id), 
+    # TODO: tv_search(query, page), tv(id)
 
   end
 end
