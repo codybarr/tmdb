@@ -4,7 +4,9 @@ Simple ruby wrapper for _The MovieDB_ based on HTTParty
 
 ## Installation
 
-_TODO_
+*tmdb* is hosted at https://rubygems.org/gems/tmdb
+
+`gem install tmdb`
 
 ## Compatability
 
@@ -20,6 +22,6 @@ Make sure to create an 'api_key' file at 'test/api_key' in order to run the test
 
 ## Copyright
 
-Copyright &copy; 2014 Cody Barr. See LICENSE.txt for
+Copyright &copy; 2014 Cody Barr. See LICENSE.md for
 further details.
 
