@@ -1,0 +1,1 @@
+# TODO: See about making this a deepopenstruct: https://github.com/aarongough/deepopenstruct

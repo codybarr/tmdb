@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "tmdb"
   gem.homepage = "http://github.com/codybarr/tmdb"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{A simple ruby wrapper for _The MovieDB API_ based on HTTParty}
+  gem.description = %Q{tmdb is a simple ruby wrapper for The Movie Database.  Exposes all TMDB API operations}
   gem.email = "cody.barr@gmail.com"
   gem.authors = ["Cody Barr"]
   # dependencies defined in Gemfile
@@ -49,3 +49,7 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+# Other requires
+
+require 'rake/notes/rake_task'
