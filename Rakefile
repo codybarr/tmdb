@@ -50,6 +50,5 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-# Other requires
-
+# Other requires  
 require 'rake/notes/rake_task'

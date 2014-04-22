@@ -1,10 +1,12 @@
 # tmdb
 
+[![Gem Version](https://badge.fury.io/rb/tmdb.svg)](http://badge.fury.io/rb/tmdb)
+
 Simple ruby wrapper for _The MovieDB_ based on HTTParty
 
 ## Installation
 
-*tmdb* is hosted at https://rubygems.org/gems/tmdb
+**tmdb** is hosted at rubygems.org
 
 `gem install tmdb`
 
@@ -15,6 +17,8 @@ I wrote this gem while using ruby 2.0.0, I haven't tested compatability with oth
 ## Usage
 
 _TODO_
+
+_tmdb is a work in progress and isn't really usable at the moment.  It's my first gem so I'm going to take some time working on it_
 
 ## Testing
 
