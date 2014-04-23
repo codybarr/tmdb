@@ -14,6 +14,33 @@ Simple ruby wrapper for _The MovieDB_ based on HTTParty
 
 I wrote this gem while using ruby 2.0.0, I haven't tested compatability with other versions.
 
+## API Coverage
+
+Current available:
+* [API](#api)
+    * ::api_key=
+    * ::config
+* [Movie](#movies)
+    * ::title_search
+    * ::search
+    * ::id
+* [TV](#tv)
+    * ::search
+    * ::id
+
+Todo: 
+* API
+    * ::genres
+* Movie
+    * ::popular
+    * ::top_rated
+* TV
+    * ::popular
+    * ::top_rated
+* People/Person
+    * ::id
+    * ::search
+
 ## Examples
 
 ### Configuration
@@ -48,6 +75,8 @@ movies = TMDB::Movie.title_search(query: 'the matrix')
 # Then you can pull the data from the results, ie.
 movies.first.title
 # => "The Matrix"
+
+# Use .search for to find by various parameters (ie. release date)
 
 # To pull all the information for a particular movie, run an id search:
 movie = TMDB::Movie.id(550)
