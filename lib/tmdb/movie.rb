@@ -8,7 +8,7 @@ module TMDB
         # Accepted parameters:
         # :page, :include_adult (true / false) , :year
         options.merge!(api_key: TMDB::API.api_key)
-        results = TVDB::API.get("/3/search/movie", query: options)['results']
+        results = TMDB::API.get("/3/search/movie", query: options)['results']
         movies = []
         results.each do |result|
           movies.push(Hashie::Mash.new(result))
@@ -18,7 +18,7 @@ module TMDB
 
       def self.id(movie_id)
         options = { api_key: TMDB::API.api_key }
-        Hashie::Mash.new(self.class.get("/3/movie/#{movie_id}", query: options))
+        Hashie::Mash.new(TMDB::API.get("/3/movie/#{movie_id}", query: options))
         # movie.title = "Fight Club"
       end
   end

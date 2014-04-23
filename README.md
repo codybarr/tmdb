@@ -26,9 +26,25 @@ TMDB::API.api_key = "YOUR_API_KEY"
 TMDB::API.config
 # => (see http://docs.themoviedb.apiary.io/#configuration)
 
-# To search for movies based on a query
+# To search for movies based on a query (returns an array of Hashie::Mash objects)
 movies = TMDB::Movie.search(query: 'the matrix')
-# => 
+# => <Hashie::Mash "adult"=>false,
+#  "backdrop_path"=>"/7u3pxc0K1wx32IleAkLv78MKgrw.jpg",
+#  "id"=>603,
+#  "original_title"=>"The Matrix",
+#  "release_date"=>"1999-03-30",
+#  "poster_path"=>"/gynBNzwyaHKtXqlEKKLioNkjKgN.jpg",
+#  "popularity"=>10.3021669763687,
+#  "title"=>"The Matrix",
+#  "vote_average"=>7.4,
+#  "vote_count"=>3674> ...
+
+# Then you can pull the data from the results, ie.
+movies.first.title
+# => "The Matrix"
+
+# To pull all the information for a particular movie, run an id search:
+movie = TMDB::Movie.id(550)
 ```
 
 ## Usage

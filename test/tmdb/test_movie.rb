@@ -5,16 +5,12 @@ require_relative '../test_helper'
 describe TMDB::Movie do
   # Create a 'test/api_key' file and paste in your API key to run the tests
   # TODO: Work in 'gem webmock' for offline testing, review: http://code.tutsplus.com/articles/writing-an-api-wrapper-in-ruby-with-tdd--net-23875
-  API_KEY = File.open('test/api_key').read
-
-  before do
-    TMDB::Config.api_key = API_KEY
-  end
+  TMDB::API.api_key = API_KEY
 
   # TMDB::Movie::search(query, page, etc.)
   describe ".search" do
     it "should return correct results" do
-      puts movies = TMDB::Movie.search(query: 'the matrix')
+      movies = TMDB::Movie.search(query: 'the matrix')
 
       movies.first.title.must_equal "The Matrix"
     end
@@ -24,9 +20,7 @@ describe TMDB::Movie do
 
   describe ".id" do
 
-    before do 
-      movie = TMDB::Movie.id('550')
-    end
+    let (:movie) { TMDB::Movie.id(550) }
 
     it "should return the correct movie" do
       movie.title.must_equal "Fight Club"
