@@ -33,7 +33,7 @@ TMDB::API.config
 ```ruby
 # To search for movies based on a query (returns an array of Hashie::Mash objects)
 # Use any of the parameters listed here: http://docs.themoviedb.apiary.io/#get-%2F3%2Fsearch%2Fmovie
-movies = TMDB::Movie.search(query: 'the matrix')
+movies = TMDB::Movie.title_search(query: 'the matrix')
 # => <Hashie::Mash "adult"=>false,
   "backdrop_path"=>"/7u3pxc0K1wx32IleAkLv78MKgrw.jpg",
   "id"=>603,

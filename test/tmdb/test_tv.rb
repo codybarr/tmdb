@@ -9,7 +9,7 @@ describe TMDB::TV do
     it "should return correct results" do
       shows = TMDB::TV.search(query: 'walking dead')
 
-      shows.first['name'].must_equal "The Walking Dead"
+      shows.first.name.must_equal "The Walking Dead"
     end
   end
 

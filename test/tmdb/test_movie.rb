@@ -7,17 +7,31 @@ describe TMDB::Movie do
   # TODO: Work in 'gem webmock' for offline testing, review: http://code.tutsplus.com/articles/writing-an-api-wrapper-in-ruby-with-tdd--net-23875
   TMDB::API.api_key = API_KEY
 
-  # TMDB::Movie::search(query, page, etc.)
-  describe ".search" do
+  # TMDB::Movie::title_search(query, page, etc.)
+  describe ".title_search" do
     it "should return correct results" do
-      movies = TMDB::Movie.search(query: 'the matrix')
+      movies = TMDB::Movie.title_search(query: 'the matrix')
 
       movies.first.title.must_equal "The Matrix"
     end
   end
 
-  # TMDB::Movie::id(movie_id)
+  # TMDB::Movie::seach(release_date.gte, page, etc.)
+  describe ".search" do
+    it "should return recent results" do
+      movies = TMDB::Movie.search('release_date.gte' => '2014-01-01',
+                                  'release_date.lte' => (Time.now.strftime("%Y-%m-%d")),
+                                  primary_release_year: 2014)
 
+      # Some of these might fail because release_date.lte/gte search all available release dates
+      movies.each do |movie|
+        movie[:release_date].must_be :<, Time.now.to_s
+        movie[:release_date].must_be :>, '2014-01-01'
+      end
+    end
+  end
+
+  # TMDB::Movie::id(movie_id)
   describe ".id" do
 
     let (:movie) { TMDB::Movie.id(550) }
