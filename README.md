@@ -16,6 +16,7 @@ I wrote this gem while using ruby 2.0.0, I haven't tested compatability with oth
 
 ## Examples
 
+### Configuration
 ```ruby
 require 'tmdb'
 
@@ -25,19 +26,24 @@ TMDB::API.api_key = "YOUR_API_KEY"
 # Get the configuration data
 TMDB::API.config
 # => (see http://docs.themoviedb.apiary.io/#configuration)
+```
 
+### Movies
+
+```ruby
 # To search for movies based on a query (returns an array of Hashie::Mash objects)
+# Use any of the parameters listed here: http://docs.themoviedb.apiary.io/#get-%2F3%2Fsearch%2Fmovie
 movies = TMDB::Movie.search(query: 'the matrix')
 # => <Hashie::Mash "adult"=>false,
-#  "backdrop_path"=>"/7u3pxc0K1wx32IleAkLv78MKgrw.jpg",
-#  "id"=>603,
-#  "original_title"=>"The Matrix",
-#  "release_date"=>"1999-03-30",
-#  "poster_path"=>"/gynBNzwyaHKtXqlEKKLioNkjKgN.jpg",
-#  "popularity"=>10.3021669763687,
-#  "title"=>"The Matrix",
-#  "vote_average"=>7.4,
-#  "vote_count"=>3674> ...
+  "backdrop_path"=>"/7u3pxc0K1wx32IleAkLv78MKgrw.jpg",
+  "id"=>603,
+  "original_title"=>"The Matrix",
+  "release_date"=>"1999-03-30",
+  "poster_path"=>"/gynBNzwyaHKtXqlEKKLioNkjKgN.jpg",
+  "popularity"=>10.3021669763687,
+  "title"=>"The Matrix",
+  "vote_average"=>7.4,
+  "vote_count"=>3674> ...
 
 # Then you can pull the data from the results, ie.
 movies.first.title
@@ -46,39 +52,48 @@ movies.first.title
 # To pull all the information for a particular movie, run an id search:
 movie = TMDB::Movie.id(550)
 # => <Hashie::Mash "adult"=>false,
- "backdrop_path"=>"/hNFMawyNDWZKKHU4GYCBz1krsRM.jpg",
- "belongs_to_collection"=>nil,
- "budget"=>63000000,
- "genres"=>
-  [{"id"=>28, "name"=>"Action"},
-   {"id"=>18, "name"=>"Drama"},
-   {"id"=>53, "name"=>"Thriller"}],
- "homepage"=>"",
- "id"=>550,
- "imdb_id"=>"tt0137523",
- "original_title"=>"Fight Club",
- "overview"=>
-  "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.",
- "popularity"=>10.0690866732421,
- "poster_path"=>"/hpt3aa5i0TrSAnEdl3VJrRrje8C.jpg",
- "production_companies"=>
-  [{"name"=>"20th Century Fox", "id"=>25},
-   {"name"=>"Fox 2000 Pictures", "id"=>711},
-   {"name"=>"Regency Enterprises", "id"=>508}],
- "production_countries"=>
-  [{"iso_3166_1"=>"DE", "name"=>"Germany"},
-   {"iso_3166_1"=>"US", "name"=>"United States of America"}],
- "release_date"=>"1999-10-14",
- "revenue"=>100853753,
- "runtime"=>139,
- "spoken_languages"=>[{"iso_639_1"=>"en", "name"=>"English"}],
- "status"=>"Released",
- "tagline"=>
-  "How much can you know about yourself if you've never been in a fight?",
- "title"=>"Fight Club",
- "vote_average"=>7.6,
- "vote_count"=>2838>
+"backdrop_path"=>"/hNFMawyNDWZKKHU4GYCBz1krsRM.jpg",
+"belongs_to_collection"=>nil,
+"budget"=>63000000,
+"genres"=>
+ [{"id"=>28, "name"=>"Action"},
+  {"id"=>18, "name"=>"Drama"},
+  {"id"=>53, "name"=>"Thriller"}],
+"homepage"=>"",
+"id"=>550,
+"imdb_id"=>"tt0137523",
+"original_title"=>"Fight Club",
+"overview"=>
+ "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion."...>
 ```
+
+### TV
+
+```ruby
+# Similar to Movies
+TMDB::TV.search(query: 'walking dead')
+# => <Hashie::Mash {"backdrop_path"=>"/nGzg3mn3C6fYVE0SvXHmY2XX4P2.jpg",
+ "created_by"=>
+  [{"id"=>4027,
+    "name"=>"Frank Darabont",
+    "profile_path"=>"/fLKzpG3J88lPr8y8dCJbcFKN6iX.jpg"}],
+ "episode_run_time"=>[60, 45],
+ "first_air_date"=>"2010-10-31",
+ "genres"=>
+  [{"id"=>18, "name"=>"Drama"},
+   {"id"=>27, "name"=>"Horror"},
+   {"id"=>53, "name"=>"Thriller"}],
+ "homepage"=>"http://www.amctv.com/shows/the-walking-dead/",
+ "id"=>1402,
+ "in_production"=>true,
+ "languages"=>["en"],
+ "last_air_date"=>"2014-03-30",
+ "name"=>"The Walking Dead" ...>
+```
+
+### More Examples
+
+You can look through the tests for more examples
 
 ## Usage
 

@@ -19,7 +19,7 @@ module TMDB
     def self.config
       options = { api_key: self.api_key }
       response = TMDB::API.get("/3/configuration", query: options).parsed_response
-      Hashie::Mash.new(response)
+      OpenStruct.new(response)
       # configuration['images']['base_url'] => "http://image.tmdb.org/t/p/" 
     end
 

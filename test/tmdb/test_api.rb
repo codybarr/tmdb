@@ -8,7 +8,7 @@ describe TMDB::API do
   # TMDB::API::search(query, page, etc.)
   describe ".config" do
     it "should return the configuration data" do
-      TMDB::API.config.wont_be_empty
+      TMDB::API.config.must_be_instance_of OpenStruct
     end
   end
 end

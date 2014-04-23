@@ -6,7 +6,7 @@ module TMDB
 
       def self.search(options = {})
         # Accepted parameters:
-        # :page, :include_adult (true / false) , :year
+        # :page, :include_adult (true / false), :year
         options.merge!(api_key: TMDB::API.api_key)
         results = TMDB::API.get("/3/search/movie", query: options)['results']
         movies = []
