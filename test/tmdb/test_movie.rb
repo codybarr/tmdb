@@ -23,6 +23,8 @@ describe TMDB::Movie do
     let (:movie) { TMDB::Movie.id(550) }
 
     it "should return the correct movie" do
+      puts movie
+      pp movie
       movie.title.must_equal "Fight Club"
     end
 
