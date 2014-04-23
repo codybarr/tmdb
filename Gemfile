@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 # Add dependencies required to use your gem here.
 
 gem 'httparty', '~> 0.13', '>= 0.13.1'
-gem 'hashie'
+gem 'hashie', '~> 2.1', '>= 2.1.1'
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
