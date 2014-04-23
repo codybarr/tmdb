@@ -14,6 +14,23 @@ Simple ruby wrapper for _The MovieDB_ based on HTTParty
 
 I wrote this gem while using ruby 2.0.0, I haven't tested compatability with other versions.
 
+## Examples
+
+```ruby
+require 'tmdb'
+
+# Always run Config's api_key class method first to set the api key class variable
+TMDB::API.api_key = "YOUR_API_KEY"
+
+# Get the configuration data
+TMDB::API.config
+# => (see http://docs.themoviedb.apiary.io/#configuration)
+
+# To search for movies based on a query
+movies = TMDB::Movie.search(query: 'the matrix')
+# => 
+```
+
 ## Usage
 
 _TODO_
