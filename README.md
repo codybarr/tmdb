@@ -20,6 +20,7 @@ Current available:
 * [API](#api)
     * ::api_key=
     * ::config
+    * ::genres(source)
 * [Movie](#movies)
     * ::title_search
     * ::search
@@ -29,8 +30,6 @@ Current available:
     * ::id
 
 Todo: 
-* API
-    * ::genres
 * Movie
     * ::popular
     * ::top_rated
@@ -43,16 +42,24 @@ Todo:
 
 ## Examples
 
-### Configuration
+### API
 ```ruby
 require 'tmdb'
 
-# Always run Config's api_key class method first to set the api key class variable
+# Always run API's api_key class method first to set the api key class variable
 TMDB::API.api_key = "YOUR_API_KEY"
 
 # Get the configuration data
 TMDB::API.config
 # => (see http://docs.themoviedb.apiary.io/#configuration)
+
+# Get a hash of genres (for Movies or TV)
+TMDB::API.genres
+# {28=>"Action", 12=>"Adventure", etc..}
+# (Default is for movies)
+
+TMDB::API.genres("tv")
+# (for TV)
 ```
 
 ### Movies
