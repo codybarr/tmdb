@@ -16,8 +16,10 @@ describe TMDB::Movie do
     end
   end
 
-  # TMDB::Movie::seach(release_date.gte, page, etc.)
-  describe ".search" do
+  # TMDB::Movie::search(release_date.gte, page, etc.)
+  describe ".search('release_date.gte' => '2014-01-01',
+    'release_date.lte' => (Time.now.strftime("%Y-%m-%d"))" do
+    
     it "should return recent results" do
       movies = TMDB::Movie.search('release_date.gte' => '2014-01-01',
                                   'release_date.lte' => (Time.now.strftime("%Y-%m-%d")),
@@ -46,4 +48,13 @@ describe TMDB::Movie do
     end
 
   end
+
+  # TMDB::Movie::popular
+  describe ".popular" do
+    it "should return a list of popular results" do
+      movies = TMDB::Movie.popular
+      movies.must_be_instance_of Array
+    end
+  end
+
 end

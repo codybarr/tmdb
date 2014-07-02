@@ -25,13 +25,13 @@ Current available:
     * ::title_search
     * ::search
     * ::id
+    * ::popular
 * [TV](#tv)
     * ::search
     * ::id
 
 Todo: 
 * Movie
-    * ::popular
     * ::top_rated
 * TV
     * ::popular
@@ -65,8 +65,7 @@ TMDB::API.genres("tv")
 ### Movies
 
 ```ruby
-# To search for movies based on a query (returns an array of Hashie::Mash objects)
-# Use any of the parameters listed here: http://docs.themoviedb.apiary.io/#get-%2F3%2Fsearch%2Fmovie
+# To search for movies by title (returns an array of Hashie::Mash objects)
 movies = TMDB::Movie.title_search(query: 'the matrix')
 # => <Hashie::Mash "adult"=>false,
   "backdrop_path"=>"/7u3pxc0K1wx32IleAkLv78MKgrw.jpg",
@@ -83,7 +82,12 @@ movies = TMDB::Movie.title_search(query: 'the matrix')
 movies.first.title
 # => "The Matrix"
 
-# Use .search for to find by various parameters (ie. release date)
+# Use .search to find by various parameters (ie. release date)
+movies = TMDB::Movie.search('release_date.gte' => '2014-01-01',
+                            'release_date.lte' => (Time.now.strftime("%Y-%m-%d")),
+                            primary_release_year: 2014)
+# => Array of <Hashie::Mash> movies
+
 
 # To pull all the information for a particular movie, run an id search:
 movie = TMDB::Movie.id(550)
@@ -101,6 +105,10 @@ movie = TMDB::Movie.id(550)
 "original_title"=>"Fight Club",
 "overview"=>
  "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion."...>
+
+# Use .popular to final recent popular movies (according to The Movie Database)
+movies = TMDB::Movie.popular
+# => Array of <Hashie::Mash> movies
 ```
 
 ### TV

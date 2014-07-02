@@ -40,7 +40,7 @@ module TMDB
         genres[genre['id']] = genre['name']
       end
       
-      puts genres
+      return genres
     end
   end
 end
