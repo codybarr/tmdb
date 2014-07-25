@@ -17,8 +17,7 @@ describe TMDB::Movie do
   end
 
   # TMDB::Movie::search(release_date.gte, page, etc.)
-  describe ".search('release_date.gte' => '2014-01-01',
-    'release_date.lte' => (Time.now.strftime("%Y-%m-%d"))" do
+  describe ".search('...')" do
     
     it "should return recent results" do
       movies = TMDB::Movie.search('release_date.gte' => '2014-01-01',
