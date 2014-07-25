@@ -8,19 +8,19 @@ describe TMDB::Movie do
   TMDB::API.api_key = API_KEY
 
   # TMDB::Movie::title_search(query, page, etc.)
-  describe ".title_search" do
+  describe ".search" do
     it "should return correct results" do
-      movies = TMDB::Movie.title_search(query: 'the matrix')
+      movies = TMDB::Movie.search('the matrix')
 
       movies.first.title.must_equal "The Matrix"
     end
   end
 
   # TMDB::Movie::search(release_date.gte, page, etc.)
-  describe ".search('...')" do
+  describe ".advanced_search('...')" do
     
     it "should return recent results" do
-      movies = TMDB::Movie.search('release_date.gte' => '2014-01-01',
+      movies = TMDB::Movie.advanced_search('release_date.gte' => '2014-01-01',
                                   'release_date.lte' => (Time.now.strftime("%Y-%m-%d")),
                                   primary_release_year: 2014)
 

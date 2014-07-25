@@ -2,22 +2,35 @@
 # TODO: Review http://ruby.learncodethehardway.org/book/ex44.html first, figure out if we ant to use inheritance or composition
 
 module TMDB
-  class Movie
-    def self.title_search(options = {})
+  class Movie < Hashie::Mash
+    def poster(size='original')
+      # Poster Sizes: ["w92", "w154", "w185", "w342", "w500", "w780", "original"]
+      config = TMDB::API.config
+      config.images.base_url + config.images.poster_sizes[size] + self.poster_path
+    end
+
+    def backdrop(size='original')
+      # Backdrop Sizes: ["w300", "w780", "w1280", "original"]
+      config = TMDB::API.config
+      config.images.base_url + config.images.poster_sizes[size] + self.poster_path
+    end
+
+    def self.search(title, options = {})
       # Accepted parameters:
       # :page, :include_adult (true / false), :year
-      options.merge!(api_key: TMDB::API.api_key)
+      options.merge!(api_key: TMDB::API.api_key, 
+                     query: title)
       results = TMDB::API.get("/3/search/movie", query: options)['results']
       movies = []
       results.each do |result|
-        movies.push(Hashie::Mash.new(result))
+        movies.push(TMDB::Movie.new(result))
       end
       return movies
     end
 
     # language (ISO_639_1: 'en')
     # country (ISO_3166_1: 'US')
-    def self.search(options = {})
+    def self.advanced_search(options = {})
       # US-snobbish
       options.merge!(api_key: TMDB::API.api_key,
                      language: 'en',
@@ -32,7 +45,7 @@ module TMDB
 
     def self.id(movie_id)
       options = { api_key: TMDB::API.api_key }
-      Hashie::Mash.new(TMDB::API.get("/3/movie/#{movie_id}", query: options))
+      TMDB::Movie.new(TMDB::API.get("/3/movie/#{movie_id}", query: options))
       # movie.title = "Fight Club"
     end
 
@@ -41,7 +54,7 @@ module TMDB
       results = TMDB::API.get("/3/movie/popular", query: options)['results']
       movies = []
       results.each do |result|
-        movies.push(Hashie::Mash.new(result))
+        movies.push(TMDB::Movie.new(result))
       end     
       return movies
     end

@@ -22,8 +22,8 @@ Current available:
     * ::config
     * ::genres(source)
 * [Movie](#movies)
-    * ::title_search
     * ::search
+    * ::advanced_search
     * ::id
     * ::popular
 * [TV](#tv)
@@ -65,9 +65,9 @@ TMDB::API.genres("tv")
 ### Movies
 
 ```ruby
-# To search for movies by title (returns an array of Hashie::Mash objects)
-movies = TMDB::Movie.title_search(query: 'the matrix')
-# => <Hashie::Mash "adult"=>false,
+# To search for movies by title (returns an array of TMDB:Movie objects)
+movies = TMDB::Movie.search('the matrix')
+# => <TMDB::Movie "adult"=>false,
   "backdrop_path"=>"/7u3pxc0K1wx32IleAkLv78MKgrw.jpg",
   "id"=>603,
   "original_title"=>"The Matrix",
@@ -82,11 +82,11 @@ movies = TMDB::Movie.title_search(query: 'the matrix')
 movies.first.title
 # => "The Matrix"
 
-# Use .search to find by various parameters (ie. release date)
-movies = TMDB::Movie.search('release_date.gte' => '2014-01-01',
+# Use .advanced_search to find by various parameters (ie. release date)
+movies = TMDB::Movie.advanced_search('release_date.gte' => '2014-01-01',
                             'release_date.lte' => (Time.now.strftime("%Y-%m-%d")),
                             primary_release_year: 2014)
-# => Array of <Hashie::Mash> movies
+# => Array of <TMDB::Movie>s
 
 
 # To pull all the information for a particular movie, run an id search:
