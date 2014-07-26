@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/tmdb.svg)](http://badge.fury.io/rb/tmdb)
 
-Simple ruby wrapper for _The MovieDB_ based on HTTParty
+Simple ruby wrapper for _The MovieDB_ based on HTTParty (starting to transform into more of an abstraction than a wrapper: http://wynnnetherland.com/journal/what-makes-a-good-api-wrapper)
 
 ## Installation
 
@@ -26,6 +26,8 @@ Current available:
     * ::advanced_search
     * ::id
     * ::popular
+    * #poster(size)
+    * #backdrop(size)
 * [TV](#tv)
     * ::search
     * ::id
@@ -64,6 +66,10 @@ TMDB::API.genres("tv")
 
 ### Movies
 
+#### Class Methods
+
+##### ::search
+
 ```ruby
 # To search for movies by title (returns an array of TMDB:Movie objects)
 movies = TMDB::Movie.search('the matrix')
@@ -81,14 +87,21 @@ movies = TMDB::Movie.search('the matrix')
 # Then you can pull the data from the results, ie.
 movies.first.title
 # => "The Matrix"
+```
 
+##### ::advanced_search
+
+```ruby
 # Use .advanced_search to find by various parameters (ie. release date)
 movies = TMDB::Movie.advanced_search('release_date.gte' => '2014-01-01',
                             'release_date.lte' => (Time.now.strftime("%Y-%m-%d")),
                             primary_release_year: 2014)
 # => Array of <TMDB::Movie>s
+```
 
+##### ::id
 
+```ruby
 # To pull all the information for a particular movie, run an id search:
 movie = TMDB::Movie.id(550)
 # => <Hashie::Mash "adult"=>false,
@@ -105,13 +118,41 @@ movie = TMDB::Movie.id(550)
 "original_title"=>"Fight Club",
 "overview"=>
  "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion."...>
+ ```
 
+##### ::popular
+
+```ruby
 # Use .popular to final recent popular movies (according to The Movie Database)
 movies = TMDB::Movie.popular
 # => Array of <Hashie::Mash> movies
 ```
 
+#### Instance Methods
+
+##### #poster
+
+```ruby
+# Use .poster to return a particular TMDB::Movie's poster path, default is 'original'
+# Poster Sizes: ["w92", "w154", "w185", "w342", "w500", "w780", "original"]
+TMDB::Movie.id(550).poster
+# => http://image.tmdb.org/t/p/original/2lECpi35Hnbpa4y46JX0aY3AWTy.jpg
+```
+
+##### #backdrop
+
+```ruby
+# Same as #poster but for backdrops
+# Backdrop Sizes: ["w300", "w780", "w1280", "original"]
+TMDB::Movie.id(550).backdrop('w300')
+# => http://image.tmdb.org/t/p/w300/hNFMawyNDWZKKHU4GYCBz1krsRM.jpg
+```
+
 ### TV
+
+#### Class Methods
+
+##### ::search
 
 ```ruby
 # Similar to Movies
@@ -135,7 +176,7 @@ TMDB::TV.search(query: 'walking dead')
  "name"=>"The Walking Dead" ...>
 ```
 
-### More Examples
+## More Examples
 
 You can look through the tests for more examples
 

@@ -8,7 +8,7 @@ describe TMDB::Movie do
   TMDB::API.api_key = API_KEY
 
   # TMDB::Movie::title_search(query, page, etc.)
-  describe ".search" do
+  describe "::search" do
     it "should return correct results" do
       movies = TMDB::Movie.search('the matrix')
 
@@ -17,7 +17,7 @@ describe TMDB::Movie do
   end
 
   # TMDB::Movie::search(release_date.gte, page, etc.)
-  describe ".advanced_search('...')" do
+  describe "::advanced_search('...')" do
     
     it "should return recent results" do
       movies = TMDB::Movie.advanced_search('release_date.gte' => '2014-01-01',
@@ -33,7 +33,7 @@ describe TMDB::Movie do
   end
 
   # TMDB::Movie::id(movie_id)
-  describe ".id" do
+  describe "::id" do
 
     let (:movie) { TMDB::Movie.id(550) }
 
@@ -49,10 +49,28 @@ describe TMDB::Movie do
   end
 
   # TMDB::Movie::popular
-  describe ".popular" do
+  describe "::popular" do
     it "should return a list of popular results" do
       movies = TMDB::Movie.popular
       movies.must_be_instance_of Array
+    end
+  end
+
+  # TMDB::Movie#poster
+  describe "#poster" do 
+    let (:movie) { TMDB::Movie.id(550) }
+
+    it "should return the poster URL" do
+      movie.poster.wont_be_nil
+    end
+  end
+
+    # TMDB::Movie#backdrop
+  describe "#backdrop" do 
+    let (:movie) { TMDB::Movie.id(550) }
+
+    it "should return the poster URL" do
+      movie.backdrop('w300').wont_be_nil
     end
   end
 

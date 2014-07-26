@@ -3,16 +3,19 @@
 
 module TMDB
   class Movie < Hashie::Mash
+
     def poster(size='original')
       # Poster Sizes: ["w92", "w154", "w185", "w342", "w500", "w780", "original"]
+      # Find latest list at TMDB::API.config.poster_sizes
       config = TMDB::API.config
-      config.images.base_url + config.images.poster_sizes[size] + self.poster_path
+      config.images.base_url + size + self.poster_path
     end
 
     def backdrop(size='original')
       # Backdrop Sizes: ["w300", "w780", "w1280", "original"]
+      # Find latest list at TMDB::API.config.backdrop_sizes
       config = TMDB::API.config
-      config.images.base_url + config.images.poster_sizes[size] + self.poster_path
+      config.images.base_url + size + self.backdrop_path
     end
 
     def self.search(title, options = {})
