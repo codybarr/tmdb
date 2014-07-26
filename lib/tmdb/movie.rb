@@ -8,14 +8,22 @@ module TMDB
       # Poster Sizes: ["w92", "w154", "w185", "w342", "w500", "w780", "original"]
       # Find latest list at TMDB::API.config.poster_sizes
       config = TMDB::API.config
-      config.images.base_url + size + self.poster_path
+      if self.poster_path
+        config.images.base_url + size + self.poster_path
+      else
+        ''
+      end
     end
 
     def backdrop(size='original')
       # Backdrop Sizes: ["w300", "w780", "w1280", "original"]
       # Find latest list at TMDB::API.config.backdrop_sizes
       config = TMDB::API.config
-      config.images.base_url + size + self.backdrop_path
+      if self.backdrop_path
+        config.images.base_url + size + self.backdrop_path
+      else
+        ''
+      end
     end
 
     def self.search(title, options = {})
