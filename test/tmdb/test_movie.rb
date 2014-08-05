@@ -36,17 +36,25 @@ describe TMDB::Movie do
   # TMDB::Movie::id(movie_id)
   describe "::id" do
 
-    let (:movie) { TMDB::Movie.id(550) }
+    let (:movie) { TMDB::Movie.id(603) }
 
     it "should return the correct movie" do
-      movie.title.must_equal "Fight Club"
+      movie.title.must_equal "The Matrix"
     end
 
     it "should allow iterating over results with multiple values" do
       movie.genres.first.name.must_equal "Action"
       movie.genres.last.name.must_equal "Thriller"
     end
+  end
 
+  #TMDB::Movie::imdb_id(imdb_id)
+  describe "::imdb_id" do
+    let (:movie) { TMDB::Movie.imdb_id('tt0133093') }
+
+    it "should return the correct movie" do
+      movie.title.must_equal "The Matrix"
+    end
   end
 
   # TMDB::Movie::popular

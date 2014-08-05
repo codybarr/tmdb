@@ -49,15 +49,21 @@ module TMDB
       results = TMDB::API.get("/3/discover/movie", query: options)['results']
       movies = []
       results.each do |result|
-        movies.push(Hashie::Mash.new(result))
+        movies.push(TMDB::Movie.new(result))
       end
       return movies
     end
 
     def self.id(movie_id)
       options = { api_key: TMDB::API.api_key }
-      TMDB::Movie.new(TMDB::API.get("/3/movie/#{movie_id}", query: options))
-      # movie.title = "Fight Club"
+      return TMDB::Movie.new(TMDB::API.get("/3/movie/#{movie_id}", query: options))
+    end
+
+    def self.imdb_id(imdb_id)
+      options = { api_key: TMDB::API.api_key,
+                  external_source: 'imdb_id'}
+      result = TMDB::API.get("/3/find/#{imdb_id}", query: options)['movie_results'].first
+      return TMDB::Movie.new(result)
     end
 
     def self.popular

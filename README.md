@@ -25,6 +25,7 @@ Current available:
     * ::search
     * ::advanced_search
     * ::id
+    * ::imdb_id
     * ::popular
     * #poster(size)
     * #backdrop(size)
@@ -73,16 +74,16 @@ TMDB::API.genres("tv")
 ```ruby
 # To search for movies by title (returns an array of TMDB:Movie objects)
 movies = TMDB::Movie.search('the matrix')
-# => <TMDB::Movie "adult"=>false,
-  "backdrop_path"=>"/7u3pxc0K1wx32IleAkLv78MKgrw.jpg",
-  "id"=>603,
-  "original_title"=>"The Matrix",
-  "release_date"=>"1999-03-30",
-  "poster_path"=>"/gynBNzwyaHKtXqlEKKLioNkjKgN.jpg",
-  "popularity"=>10.3021669763687,
-  "title"=>"The Matrix",
-  "vote_average"=>7.4,
-  "vote_count"=>3674> ...
+# => <TMDB::Movie adult=false 
+  backdrop_path="/yQeEMjnBOIAtFqIuEphyesH0a6y.jpg" 
+  id=603 
+  original_title="The Matrix"
+  popularity=5.06402605254135
+  poster_path="/gynBNzwyaHKtXqlEKKLioNkjKgN.jpg"
+  release_date="1999-03-30"
+  title="The Matrix"
+  vote_average=7.5
+  vote_count=3773>
 
 # Then you can pull the data from the results, ie.
 movies.first.title
@@ -103,29 +104,35 @@ movies = TMDB::Movie.advanced_search('release_date.gte' => '2014-01-01',
 
 ```ruby
 # To pull all the information for a particular movie, run an id search:
-movie = TMDB::Movie.id(550)
-# => <Hashie::Mash "adult"=>false,
-"backdrop_path"=>"/hNFMawyNDWZKKHU4GYCBz1krsRM.jpg",
-"belongs_to_collection"=>nil,
-"budget"=>63000000,
-"genres"=>
- [{"id"=>28, "name"=>"Action"},
-  {"id"=>18, "name"=>"Drama"},
-  {"id"=>53, "name"=>"Thriller"}],
-"homepage"=>"",
-"id"=>550,
-"imdb_id"=>"tt0137523",
-"original_title"=>"Fight Club",
-"overview"=>
- "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion."...>
+movie = TMDB::Movie.id(603)
+# => <TMDB::Movie adult=false 
+  backdrop_path="/yQeEMjnBOIAtFqIuEphyesH0a6y.jpg"
+  ...
+  budget=63000000 
+  genres=>
+    [{ id=28 name="Action",
+       id=12 name="Adventure",
+       id=878 name="Science Fiction",
+       id=53 name="Thriller" {}]
+  homepage="http://www.warnerbros.com/movies/home-entertainment/the-matrix/37313ac7-9229-474d-a423-44b7a6bc1a54.html"
+  ...
+  id=603
+  imdb_id="tt0133093"
  ```
+
+##### ::imdb_id
+
+```ruby
+# To search by IMDB ID use Movie::imdb_id:
+movie = TMDB::Movie.imdb_id('tt0133093')
+# => <TMDB::Movie yada yada>
 
 ##### ::popular
 
 ```ruby
 # Use .popular to final recent popular movies (according to The Movie Database)
 movies = TMDB::Movie.popular
-# => Array of <Hashie::Mash> movies
+# => Array of <TMDB:Movie>s
 ```
 
 #### Instance Methods
